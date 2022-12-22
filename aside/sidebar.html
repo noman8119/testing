@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <!-- Style CSS -->
+      <!-- <link rel="stylesheet" href="css/style.css"> -->
+      <!-- Demo CSS (No need to include it into your project) -->
+      <!-- <link rel="stylesheet" href="css/demo.css"> -->
+    <title>Document</title>
+    <style>
+.sidebar{
+    height: 100vh;
+    width: 300px;
+    background-color: #0279a0;
+    position: fixed;
+    left:-300px;
+    top: 0;
+    bottom: 0;
+    transition: 1s;    
+    z-index: 999;
+
+}
+.sidebar span{
+    position:absolute;
+    right:10px;
+    top: 18px;
+    background: white;
+    font-size: 18px;
+    color: black;
+    padding: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 9999;
+    width: 35px;
+    text-align: center;
+}
+.header{
+    background-color: #212529;;
+    padding: 35px 0;
+}
+.overlay{
+position: absolute;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: rgba(0, 0, 0, 0.5);
+display: none;
+z-index: 99;
+}
+.body ul {
+padding: 0;    
+}
+.body ul li{
+    list-style: none;
+    padding:15px 30px;
+    
+}
+a{
+    cursor: pointer;
+}
+.body ul li a{
+    text-decoration: none;
+    /* padding:15px 30px; */
+    width: 100%;
+    color:white;
+    cursor: pointer;
+    padding-left: 7px;
+
+}
+.body ul li a:hover{
+   color:whitesmoke;
+}
+#buttons{
+  text-align: center;
+}
+#buttons input{
+
+  margin-right: 6px;
+}
+.active{
+  background-color: #0279a0;
+  color: white;
+}
+    </style>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<!-- edita -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'>
+<link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css'><link rel="stylesheet" href="./style.css">
+    </head>
+<body id="main_body">
+
+
+    <div class="overlay" id="overlay">
+
+    </div>
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark" style="padding: 15px 5px;z-index: 99;    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;">
+        <div class="container justify-content-start">
+            <div style="text-align:center;" id="btn">
+                <a id="toggle" onclick="open1()"><i style="color: white;font-size:30px;margin-right:10px;margin-top: 4px;" class="fa fa-bars" aria-hidden="true"></i></a>
+            </div>
+          <a class="navbar-brand" href="#">Logo</a>
+       
+          <div class=" justify-content-end ml-auto" style="margin-left:auto;" id="collapsibleNavbar">
+            <ul class="navbar-nav flex-row">
+              <li class="nav-item">
+                <div class="dropdown">
+                    <button type="button" class="btn btn-primary dropdown-toggle" style="background-color: #0279a0;border: none;" data-bs-toggle="dropdown">
+                      Profile
+                    </button>
+                    <ul class="dropdown-menu w-100" style="left: -72px;">
+                      <li><a class="dropdown-item" href="#"><i class="fa fa-user" aria-hidden="true"></i>  Profile</a></li>
+                      <li><a class="dropdown-item" href="#"><i class="fa fa-sign-out" aria-hidden="true"></i> Logout</a></li>
+                      <!-- <li><a class="dropdown-item" href="#">Link 3</a></li> -->
+                    </ul>
+                  </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    <div class="sidebar" id="sidebar" >
+        <div class="header">
+        <span onclick="close1()"><i class="fa fa-times" aria-hidden="true"></i></span>
+      </div>
+<div class="body">
+<ul style="margin-top: 30px;">
+    <li><i class="fa fa-tachometer" aria-hidden="true" style="color: white;"></i> <a  onclick="myFunction()" class="pl-2">Dashboard </a>
+      <ul id="sub" style="display: none;">
+        <li><a href="">link 1</a> </li>
+        <li><a href="">link 2</a> </li>
+        <li><a href="">link 3</a> </li>
+      </ul> 
+    </li>
+    <li><i class="fa fa-users" aria-hidden="true" style="color: white;" ></i>  <a href="">Users</a> </li>
+    <li><i class="fa fa-cubes" aria-hidden="true" style="color: white;"></i> <a href=""> Products</a> </li>
+    <li><i class="fa fa-cube" aria-hidden="true" style="color: white;"></i> <a href="">Custoners</a> </li>
+    <li><i class="fa fa-user" aria-hidden="true" style="color: white;"></i> <a href="" style="padding-left: 13px;">Profile</a> </li>
+</ul>
+</div>
+
+    </div>
+    <!-- body content -->
+
+
+    <section style="padding-top: 50px;">
+        <div class="container">
+        <div class="row">
+            <div class="col-12 mx-auto mt-5">
+                <div class="card p-3">
+                  <div class="table-responsive">
+                    <!-- <table class="table table-striped"  id="myTable">         
+                          <tr>
+                            <th>Firstname</th>
+                            <th>Lastname</th>
+                            <th>Email</th>
+                          </tr>
+         
+                          <tr>
+                            <td>John</td>
+                            <td>Doe</td>
+                            <td>john@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>Mary</td>
+                            <td>Moe</td>
+                            <td>mary@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                          <tr>
+                            <td>July</td>
+                            <td>Dooley</td>
+                            <td>july@example.com</td>
+                          </tr>
+                    
+                          
+                      </table> -->
+
+                      <div class="container">
+
+                        <div class="row">
+                          <div class="col-md-12">
+                            <br>
+                            <!-- <button class="btn btn-default pull-right add-row"><i class="fa fa-plus"></i>&nbsp;&nbsp; Add Row</button> -->
+                          </div>
+                        </div>
+                      
+                        <div class="row">
+                          <div class="col-md-12">
+                            <table class="table table-bordered" id="editableTable">
+                              <thead>
+                                <tr>
+                                  <th>Name</th>
+                                  <th>Birthday</th>
+                                  <th>Age</th>
+                                  <th>Gender</th>
+                                  <th>Edit</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <tr data-id="1">
+                                  <td data-field="name">Dave Gamache</td>
+                                  <td data-field="birthday">May 19, 2015</td>
+                                  <td data-field="age">26</td>
+                                  <td data-field="sex">Male</td>
+                                  <td>
+                                    <a class="button button-small edit" title="Edit">
+                                      <i class="fa fa-pencil"></i>
+                                    </a>
+                                    
+                                    <a class="button button-small edit" title="Delete">
+                                      <i class="fa fa-trash"></i>
+                                    </a>
+                                  </td>
+                                </tr>
+                                <tr data-id="2">
+                                  <td data-field="name">Dwayne Johnson</td>
+                                  <td data-field="birthday">May 19, 2015</td>
+                                  <td data-field="age">42</td>
+                                  <td data-field="sex">Male</td>
+                                  <td>
+                                    <a class="button button-small edit" title="Edit">
+                                      <i class="fa fa-pencil"></i>
+                                    </a> <a class="button button-small edit" title="Delete">
+                                      <i class="fa fa-trash"></i>
+                                    </a>
+                                  </td>
+                                </tr>
+                                <tr data-id="3">
+                                  <td data-field="name">Halyna Nadia</td>
+                                  <td data-field="birthday">May 25, 2015</td>
+                                  <td data-field="age">22</td>
+                                  <td data-field="sex">Female</td>
+                                  <td>
+                                    <a class="button button-small edit" title="Edit">
+                                      <i class="fa fa-pencil"></i>
+                                    </a> <a class="button button-small" title="Delete">
+                                      <i class="fa fa-trash"></i>
+                                    </a>
+                                  </td>
+                                </tr>
+                                <tr data-id="4">
+                                  <td data-field="name">Halyna Nadia</td>
+                                  <td data-field="birthday">May 25, 2015</td>
+                                  <td data-field="age">22</td>
+                                  <td data-field="sex">Female</td>
+                                  <td>
+                                    <a class="button button-small edit" title="Edit">
+                                      <i class="fa fa-pencil"></i>
+                                    </a> <a class="button button-small" title="Delete">
+                                      <i class="fa fa-trash"></i>
+                                    </a>
+                                  </td>
+                                </tr>
+                                <tr data-id="5">
+                                  <td data-field="name">Halyna Nadia</td>
+                                  <td data-field="birthday">May 25, 2015</td>
+                                  <td data-field="age">22</td>
+                                  <td data-field="sex">Female</td>
+                                  <td>
+                                    <a class="button button-small edit" title="Edit">
+                                      <i class="fa fa-pencil"></i>
+                                    </a> <a class="button button-small" title="Delete">
+                                      <i class="fa fa-trash"></i>
+                                    </a>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-12">
+                <div class="card" style="margin-top: 25px;">
+                    <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                      <h4 class="card-title">John Doe</h4>
+                      <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                      <a href="#" class="btn btn-primary" style="background-color:#0279a0;border: none;">See Profile</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-12">
+                <div class="card" style="margin-top: 25px;">
+                    <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                      <h4 class="card-title">John Doe</h4>
+                      <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                      <a href="#" class="btn btn-primary" style="background-color:#0279a0;border: none;">See Profile</a>
+                    </div>
+                  </div>
+            </div>
+            <div class="col-lg-4 col-12">
+                <div class="card" style="margin-top: 25px;">
+                    <img class="card-img-top" src="https://www.w3schools.com/bootstrap4/img_avatar1.png" alt="Card image" style="width:100%">
+                    <div class="card-body">
+                      <h4 class="card-title">John Doe</h4>
+                      <p class="card-text">Some example text some example text. John Doe is an architect and engineer</p>
+                      <a href="#" class="btn btn-primary" style="background-color:#0279a0;border: none;">See Profile</a>
+                    </div>
+                  </div>
+            </div>
+        </div>
+    </div>
+    </section>
+    <script  src="js/script.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'></script><script  src="./script.js"></script>
+    
+<script>
+function open1(){
+    document.getElementById('sidebar').style.left="0";
+    // document.getElementById('btn').style.display="none";
+    document.getElementById('overlay').style.display="block";
+    document.getElementsById('main_body').style.overflow="hidden"; 
+
+}
+function close1(){
+    document.getElementById('sidebar').style.left="-300px";
+    // document.getElementById('btn').style.display="block";
+    document.getElementById('overlay').style.display="none";
+}
+</script>
+
+<script>
+function myFunction() {
+  var x = document.getElementById("sub");
+  if (x.style.display === "none") {
+    x.style.display = "block";
+  } else {
+    x.style.display = "none";
+  }
+}
+  </script>
+</body>
+</html>
